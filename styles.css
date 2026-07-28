@@ -1,0 +1,688 @@
+:root {
+  /* Neutral ink */
+  --ink: #14161a;
+  --ink-soft: rgba(20, 22, 26, 0.68);
+  --ink-mute: rgba(20, 22, 26, 0.54);
+
+  --surface: #ffffff;
+  --page-1: #ffffff;
+  --page-2: #f7f8f6;
+  --line: rgba(20, 22, 26, 0.08);
+
+  /* Lime / chartreuse accent (from reference) — used as a FILL with dark text */
+  --accent: #cdea4c;
+  --accent-strong: #bfe22f;
+  --accent-soft: rgba(205, 234, 76, 0.22);
+  --accent-ink: #4f6112; /* readable green for text on light */
+
+  --graphite: #23262f;
+  --graphite-2: #101216;
+
+  /* Gradients */
+  --grad-page: linear-gradient(180deg, #ffffff 0%, #f7f8f6 100%);
+  --grad-metal: linear-gradient(180deg, #f5f6f4 0%, #eeefec 100%);
+  --grad-accent: linear-gradient(150deg, #e6f676 0%, #daf257 45%, #cfee45 100%);
+  --grad-dark: linear-gradient(168deg, #16171a 0%, #0d0e10 100%);
+
+  --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.04);
+  --shadow-md: 0 14px 34px rgba(20, 22, 26, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--grad-page);
+  background-attachment: fixed;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Soft lime glow — sits behind everything, never grabs focus */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(56rem 40rem at 50% 120%, rgba(205, 234, 76, 0.14), transparent 64%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(140%) blur(12px);
+}
+
+.nav-inner,
+.container,
+.footer-inner {
+  width: min(100% - 2rem, 80rem);
+  margin: 0 auto;
+}
+
+.nav-inner {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 164px;
+  height: 48px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--ink);
+  background: rgba(197, 230, 48, 0.62);
+}
+
+.menu-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0.5rem;
+  color: var(--ink-soft);
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobile-links {
+  display: none;
+  padding: 0 1rem 1rem;
+}
+
+.mobile-links.open {
+  display: grid;
+  gap: 0.25rem;
+}
+
+main {
+  flex: 1;
+}
+
+/* White hero with a soft-focus lime handwritten wordmark (resting-state look) */
+.hero-liquid {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(18rem, 46vw, 34rem);
+  padding: 4rem 1.5rem;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.hero-word {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 13vw, 12rem);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-align: center;
+  color: #a9b53c; /* lighter olive handwriting */
+  -webkit-text-fill-color: #a9b53c;
+}
+
+/* Solid bright-lime highlighter blob behind: same handwriting fattened until
+   the strokes merge into one connected shape, then softened at the edges */
+.hero-word::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: #e4f43a;
+  -webkit-text-fill-color: #e4f43a;
+  -webkit-text-stroke: 0.2em #e4f43a;
+  paint-order: stroke fill;
+  filter: blur(0.055em);
+}
+
+/* Subtle ink/grain texture clipped into the letters — fails safe (no texture if unsupported) */
+.hero-word::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='140'%20height='140'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+.home-copy {
+  margin-top: 0;
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.home-copy p,
+.lede {
+  width: min(100%, 44rem);
+  margin: 0 auto;
+  color: var(--ink-soft);
+  font-size: clamp(1.2rem, 2.7vw, 1.45rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.home-copy p {
+  margin-bottom: 1.5rem;
+}
+
+.page-hero {
+  padding: 6.5rem 0 3.5rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+  font-size: clamp(2.75rem, 9vw, 5.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+  font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: -0.032em;
+  line-height: 1.06;
+}
+
+h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.section {
+  padding: 5.5rem 0;
+}
+
+.section.narrow .container {
+  width: min(100% - 2rem, 56rem);
+}
+
+.center {
+  text-align: center;
+}
+
+.body-copy {
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.body-copy p {
+  margin: 0 0 1rem;
+}
+
+.quote {
+  margin: 2rem 0 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid var(--accent-strong);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--ink);
+  background: var(--accent-soft);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid.two,
+.grid.three {
+  grid-template-columns: 1fr;
+}
+
+.card,
+.panel {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--grad-metal);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-link {
+  display: block;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.card-link:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-md);
+}
+
+/* Full lime highlight block (reference language) — one card per group */
+.card.accent-fill,
+.panel.accent-fill {
+  background: var(--grad-accent);
+  box-shadow: 0 10px 30px rgba(196, 230, 60, 0.35);
+}
+
+.accent-fill .muted {
+  color: rgba(20, 22, 26, 0.66);
+}
+
+.card-link.accent-fill:hover {
+  box-shadow: 0 16px 36px rgba(196, 230, 60, 0.48);
+}
+
+.accent-fill .button.alt {
+  color: var(--surface);
+  background: var(--grad-dark);
+  box-shadow: 0 6px 18px rgba(16, 18, 22, 0.24);
+}
+
+.card-icon {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.875rem;
+}
+
+.muted {
+  color: var(--ink-mute);
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.tracker {
+  width: min(100% - 2rem, 42rem);
+  margin: 0 auto;
+}
+
+.stats {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stat:nth-child(2) strong {
+  color: var(--accent-ink);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  color: var(--ink-mute);
+  font-size: 0.75rem;
+}
+
+.progress {
+  height: 0.75rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(20, 22, 26, 0.08);
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--grad-accent);
+}
+
+.steps {
+  display: grid;
+  gap: 1rem;
+  counter-reset: steps;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  background: var(--grad-metal);
+}
+
+.step::before {
+  counter-increment: steps;
+  content: counter(steps);
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--grad-accent);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+}
+
+.dark-band {
+  position: relative;
+  padding: 4rem 0;
+  color: var(--surface);
+  background: var(--grad-dark);
+  overflow: hidden;
+}
+
+.dark-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(34rem 24rem at 88% 112%, rgba(205, 234, 76, 0.16), transparent 62%);
+}
+
+.dark-band > * {
+  position: relative;
+}
+
+.dark-band h2,
+.dark-band h3 {
+  color: var(--surface);
+}
+
+.numbers {
+  display: grid;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.number strong {
+  display: block;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(3.25rem, 9vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--accent);
+}
+
+.number span {
+  display: block;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border: 0;
+  border-radius: 0.65rem;
+  color: var(--surface);
+  background: var(--grad-dark);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(16, 18, 22, 0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.button.alt {
+  color: var(--ink);
+  background: var(--grad-accent);
+  box-shadow: 0 6px 18px rgba(183, 221, 51, 0.35);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 10px 24px rgba(16, 18, 22, 0.26);
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.form-note {
+  display: none;
+  margin: 0;
+  color: var(--accent-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-note.show {
+  display: block;
+}
+
+.footer {
+  color: var(--ink);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  padding: 3rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.footer h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+.footer h4 {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.footer p,
+.footer a,
+.footer-bottom {
+  color: var(--ink-mute);
+  font-size: 0.875rem;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 1.625;
+}
+
+.footer ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer a:hover {
+  color: var(--accent-ink);
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .stats,
+  .numbers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tracker .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .menu-button,
+  .mobile-links {
+    display: none !important;
+  }
+
+  .grid.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid.three,
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
