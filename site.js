@@ -22,3 +22,30 @@ document.querySelectorAll("form[data-static-form]").forEach((form) => {
     if (note) note.classList.add("show");
   });
 });
+
+// Hero: hover the wordmark to play the drone video (fades in ~2.5s), keeps
+// playing after the mouse leaves, then reveals the logo again once it ends.
+const heroWord = document.querySelector(".hero-word");
+const heroVideo = document.querySelector(".hero-video");
+
+if (heroWord && heroVideo) {
+  heroVideo.muted = true;
+
+  let running = false;
+
+  heroWord.addEventListener("mouseenter", () => {
+    if (running) return;
+    running = true;
+    try {
+      heroVideo.currentTime = 0;
+    } catch (e) {}
+    heroVideo.classList.add("show");
+    const p = heroVideo.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  });
+
+  heroVideo.addEventListener("ended", () => {
+    heroVideo.classList.remove("show");
+    running = false;
+  });
+}
