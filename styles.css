@@ -99,15 +99,15 @@ textarea {
 }
 
 .nav-inner {
-  height: 4rem;
+  height: 5.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .logo {
-  width: 164px;
-  height: 48px;
+  width: 310px;
+  height: 84px;
   object-fit: contain;
   object-position: left center;
 }
@@ -120,10 +120,10 @@ textarea {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 1rem;
   border-radius: 999px;
   color: var(--ink-soft);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   transition: color 160ms ease, background-color 160ms ease;
 }
@@ -165,7 +165,7 @@ main {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: clamp(18rem, 46vw, 34rem);
+  min-height: calc(100vh - 5.5rem);
   padding: 4rem 1.5rem;
   background: var(--surface);
   overflow: hidden;
@@ -236,8 +236,34 @@ main {
 
 .home-copy {
   margin-top: 0;
-  padding: 2.5rem 1rem;
-  text-align: center;
+  padding: 4.5rem 0 3.5rem;
+  text-align: left;
+}
+
+/* Alignment utilities (keep constrained paragraphs flush to the chosen edge) */
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left > .lede,
+.text-left > p {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.text-right > .lede,
+.text-right > p {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+.tracker.text-right {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .home-copy p,
@@ -251,7 +277,13 @@ main {
 }
 
 .home-copy p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  font-size: clamp(1.6rem, 3.6vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.028em;
+  line-height: 1.18;
 }
 
 .page-hero {
@@ -382,7 +414,12 @@ h3 {
 
 .card-link {
   display: block;
+  width: min(100%, 24rem);
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.grid > .card-link.text-right {
+  justify-self: end;
 }
 
 .card-link:hover {
@@ -417,13 +454,63 @@ h3 {
   font-size: 1.875rem;
 }
 
+/* Scattered project cards — small cards drifting across the canvas */
+.scatter {
+  display: grid;
+  gap: 2rem;
+}
+
+.scatter .card {
+  width: 100%;
+}
+
+.scatter-num {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+@media (min-width: 900px) {
+  .scatter {
+    gap: 0;
+  }
+
+  .scatter .card {
+    width: 22rem;
+  }
+
+  .scatter .s1 {
+    margin: 0 0 2.5rem 0;
+  }
+
+  .scatter .s2 {
+    margin: -5rem 6% 2.5rem auto;
+  }
+
+  .scatter .s3 {
+    margin: 0 0 2.5rem 32%;
+  }
+
+  .scatter .s4 {
+    width: 30rem;
+    margin: 1rem 0 2.5rem 3%;
+  }
+
+  .scatter .s5 {
+    margin: -7rem 10% 0 auto;
+  }
+}
+
 .founder-photo {
   width: 100%;
-  max-width: 26rem;
   height: auto;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 0.85rem;
+  border-radius: 1rem;
   margin: 0 auto 1.5rem;
 }
 
