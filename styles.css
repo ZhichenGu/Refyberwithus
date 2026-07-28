@@ -72,9 +72,9 @@ body.page-home::before {
     radial-gradient(110% 24% at 50% 102%, rgba(214, 240, 110, 0.3), transparent 72%),
     linear-gradient(180deg,
       rgba(205, 234, 76, 0) 0%,
-      rgba(205, 234, 76, 0) 18%,
-      rgba(205, 234, 76, 0.08) 38%,
-      rgba(205, 234, 76, 0.17) 70%,
+      rgba(205, 234, 76, 0) 68%,
+      rgba(205, 234, 76, 0.09) 80%,
+      rgba(205, 234, 76, 0.18) 91%,
       rgba(205, 234, 76, 0.27) 100%);
 }
 
@@ -468,6 +468,27 @@ h3 {
   font-size: 1.875rem;
 }
 
+/* Pill chips for simple lists (e.g. microplastic sources) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.chip {
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: var(--grad-metal);
+  box-shadow: var(--shadow-sm);
+  font-weight: 500;
+}
+
+.chip.accent-fill {
+  background: var(--grad-accent);
+}
+
 /* Scattered project cards — small cards drifting across the canvas */
 .scatter {
   display: grid;
@@ -476,6 +497,24 @@ h3 {
 
 .scatter .card {
   width: 100%;
+}
+
+.scatter-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.ecopaper-video {
+  display: block;
+  width: 100%;
+  margin-top: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
 }
 
 .scatter-num {
@@ -488,34 +527,37 @@ h3 {
   line-height: 1;
 }
 
+/* Compact interlocking layout (like the reference): three columns, the middle
+   card straddling both rows, slight vertical offsets — everything in one view */
 @media (min-width: 900px) {
   .scatter {
-    gap: 0;
-  }
-
-  .scatter .card {
-    width: 22rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: start;
   }
 
   .scatter .s1 {
-    margin: 0 0 2.5rem 0;
+    grid-area: 1 / 1;
   }
 
   .scatter .s2 {
-    margin: -5rem 6% 2.5rem auto;
+    grid-area: 1 / 3;
+    margin-top: 3.5rem;
   }
 
   .scatter .s3 {
-    margin: 0 0 2.5rem 32%;
+    grid-area: 1 / 2 / 3 / 3;
+    align-self: center;
   }
 
   .scatter .s4 {
-    width: 30rem;
-    margin: 1rem 0 2.5rem 3%;
+    grid-area: 2 / 1;
+    margin-top: 1rem;
   }
 
   .scatter .s5 {
-    margin: -7rem 10% 0 auto;
+    grid-area: 2 / 3;
+    margin-top: 4.5rem;
   }
 }
 

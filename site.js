@@ -25,6 +25,16 @@ document.querySelectorAll("form[data-static-form]").forEach((form) => {
 
 // Hero: hover the wordmark to play the drone video (fades in ~2.5s), keeps
 // playing after the mouse leaves, then reveals the logo again once it ends.
+// Videos marked data-hover-play: start on hover, pause when the mouse leaves.
+document.querySelectorAll("video[data-hover-play]").forEach((video) => {
+  video.muted = true;
+  video.addEventListener("mouseenter", () => {
+    const p = video.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  });
+  video.addEventListener("mouseleave", () => video.pause());
+});
+
 const heroWord = document.querySelector(".hero-word");
 const heroVideo = document.querySelector(".hero-video");
 
