@@ -16,6 +16,11 @@
   --accent-ink: #1c6a7c; /* readable teal for text on light */
   --accent-rgb: 79, 180, 201;
 
+  /* Secondary logo green (#89BD4F) — used sparingly, never as the main tone */
+  --accent-2: #89bd4f;
+  --accent-2-soft: rgba(137, 189, 79, 0.14);
+  --accent-2-ink: #4c6f24;
+
   --graphite: #23262f;
   --graphite-2: #101216;
 
@@ -23,6 +28,7 @@
   --grad-page: linear-gradient(180deg, #ffffff 0%, #f6f9fa 100%);
   --grad-metal: linear-gradient(180deg, #f4f7f8 0%, #eaeff1 100%);
   --grad-accent: linear-gradient(150deg, #8ed5e3 0%, #4fb4c9 55%, #2f93aa 100%);
+  --grad-accent-2: linear-gradient(150deg, #b3d986 0%, #89bd4f 55%, #6a9c36 100%);
   --grad-dark: linear-gradient(168deg, #16171a 0%, #0d0e10 100%);
 
   --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.04);
@@ -423,6 +429,33 @@ h3 {
 
 .card-link.accent-fill:hover {
   box-shadow: 0 16px 36px rgba(79, 180, 201, 0.48);
+}
+
+/* Secondary logo green — a small counterpoint to the teal, used on a few cards */
+.card.accent-fill-alt,
+.panel.accent-fill-alt,
+.chip.accent-fill-alt {
+  background: var(--grad-accent-2);
+  box-shadow: 0 10px 30px rgba(137, 189, 79, 0.32);
+}
+
+.accent-fill-alt .muted {
+  color: rgba(20, 22, 26, 0.66);
+}
+
+.accent-fill-alt .card-cta,
+.accent-fill-alt .scatter-num {
+  color: var(--ink);
+}
+
+.card-link.accent-fill-alt:hover {
+  box-shadow: 0 16px 36px rgba(137, 189, 79, 0.45);
+}
+
+.accent-fill-alt .button.alt {
+  color: var(--surface);
+  background: var(--grad-dark);
+  box-shadow: 0 6px 18px rgba(16, 18, 22, 0.24);
 }
 
 .accent-fill .button.alt {
@@ -855,6 +888,15 @@ h3 {
 .chart-bars .bar:nth-child(3) { animation-delay: 220ms, 600ms; }
 .chart-bars .bar:nth-child(4) { animation-delay: 330ms, 900ms; }
 .chart-bars .bar:nth-child(5) { animation-delay: 440ms, 1200ms; }
+
+/* Peak bar picks up the logo's green as a small highlight */
+.chart-bars .bar-alt {
+  background: var(--grad-accent-2);
+}
+
+.chart-bars .bar-alt em {
+  color: var(--accent-2-ink);
+}
 
 .chart-bars .bar em {
   position: absolute;
