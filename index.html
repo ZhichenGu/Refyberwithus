@@ -7,7 +7,7 @@
     <meta name="description" content="A sustainability initiative by students in Hong Kong focused on textile waste reduction." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="page-home">
@@ -40,7 +40,7 @@
           <video class="hero-video" muted playsinline preload="auto">
             <source src="./hero-video.mp4" type="video/mp4" />
           </video>
-          <h1 class="hero-word" data-text="Refyber With Us">Refyber With Us</h1>
+          <img class="hero-logo" src="./refyber-logo.png" alt="Refyber With Us" />
         </section>
         <section class="home-copy">
           <div class="container text-left">
@@ -57,9 +57,27 @@
           <div class="container">
             <div class="tracker panel">
               <h2>Microfiber Collection Tracker</h2>
-              <div class="stats">
-                <div class="stat"><strong>720g</strong><span class="muted small">Total Grams Collected</span></div>
-                <div class="stat"><strong>5</strong><span class="muted small">Collections Made</span></div>
+              <div class="tracker-viz">
+                <svg class="tracker-ring" viewBox="0 0 200 200" role="img" aria-label="720 grams of 10,000 gram goal collected">
+                  <circle class="ring-track" cx="100" cy="100" r="86" />
+                  <circle class="ring-fill" cx="100" cy="100" r="86" />
+                </svg>
+                <div class="tracker-figure">
+                  <strong>720<span class="unit">g</span></strong>
+                  <span class="muted small">Total Grams Collected</span>
+                  <span class="tracker-goal">7.2% of our 10,000g goal</span>
+                </div>
+                <div class="tracker-chart" role="img" aria-label="Grams collected per project: 120, 180, 95, 210, 115">
+                  <div class="chart-bars">
+                    <span class="bar" style="--v:57%"><em>120g</em></span>
+                    <span class="bar" style="--v:86%"><em>180g</em></span>
+                    <span class="bar" style="--v:45%"><em>95g</em></span>
+                    <span class="bar" style="--v:100%"><em>210g</em></span>
+                    <span class="bar" style="--v:55%"><em>115g</em></span>
+                  </div>
+                  <div class="chart-axis"><span>/01</span><span>/02</span><span>/03</span><span>/04</span><span>/05</span></div>
+                  <span class="chart-caption muted small">Grams collected per project</span>
+                </div>
               </div>
             </div>
           </div>

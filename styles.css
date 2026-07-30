@@ -9,19 +9,20 @@
   --page-2: #f7f8f6;
   --line: rgba(20, 22, 26, 0.08);
 
-  /* Lime / chartreuse accent (from reference) — used as a FILL with dark text */
-  --accent: #d7f24c;
-  --accent-strong: #c6ea36;
-  --accent-soft: rgba(210, 240, 80, 0.22);
-  --accent-ink: #4f6112; /* readable green for text on light */
+  /* Teal accent (#4FB4C9) — used as a FILL with dark text */
+  --accent: #4fb4c9;
+  --accent-strong: #3aa3ba;
+  --accent-soft: rgba(79, 180, 201, 0.16);
+  --accent-ink: #1c6a7c; /* readable teal for text on light */
+  --accent-rgb: 79, 180, 201;
 
   --graphite: #23262f;
   --graphite-2: #101216;
 
-  /* Gradients */
-  --grad-page: linear-gradient(180deg, #ffffff 0%, #f7f8f6 100%);
-  --grad-metal: linear-gradient(180deg, #f5f6f4 0%, #eeefec 100%);
-  --grad-accent: linear-gradient(150deg, #ecfb8c 0%, #ddf765 45%, #d2f34e 100%);
+  /* Gradients — all extending from #4FB4C9 */
+  --grad-page: linear-gradient(180deg, #ffffff 0%, #f6f9fa 100%);
+  --grad-metal: linear-gradient(180deg, #f4f7f8 0%, #eaeff1 100%);
+  --grad-accent: linear-gradient(150deg, #8ed5e3 0%, #4fb4c9 55%, #2f93aa 100%);
   --grad-dark: linear-gradient(168deg, #16171a 0%, #0d0e10 100%);
 
   --shadow-sm: 0 1px 2px rgba(20, 22, 26, 0.04);
@@ -43,8 +44,10 @@ body {
   color: var(--ink);
   background: var(--grad-page);
   background-attachment: fixed;
-  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -56,7 +59,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(56rem 40rem at 50% 120%, rgba(205, 234, 76, 0.14), transparent 64%);
+    radial-gradient(56rem 40rem at 50% 120%, rgba(79, 180, 201, 0.14), transparent 64%);
 }
 
 /* One continuous lime wash behind the homepage. It spans the whole document
@@ -69,13 +72,13 @@ body.page-home {
 body.page-home::before {
   position: absolute;
   background:
-    radial-gradient(110% 24% at 50% 102%, rgba(214, 240, 110, 0.3), transparent 72%),
+    radial-gradient(110% 24% at 50% 102%, rgba(126, 205, 220, 0.3), transparent 72%),
     linear-gradient(180deg,
-      rgba(205, 234, 76, 0) 0%,
-      rgba(205, 234, 76, 0) 80%,
-      rgba(205, 234, 76, 0.1) 88%,
-      rgba(205, 234, 76, 0.19) 95%,
-      rgba(205, 234, 76, 0.27) 100%);
+      rgba(79, 180, 201, 0) 0%,
+      rgba(79, 180, 201, 0) 80%,
+      rgba(79, 180, 201, 0.1) 88%,
+      rgba(79, 180, 201, 0.19) 95%,
+      rgba(79, 180, 201, 0.27) 100%);
 }
 
 a {
@@ -142,15 +145,15 @@ textarea {
   padding: 0.55rem 1rem;
   border-radius: 999px;
   color: var(--ink-soft);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   transition: color 160ms ease, background-color 160ms ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--ink);
-  background: rgba(197, 230, 48, 0.62);
+  background: rgba(79, 180, 201, 0.62);
 }
 
 .menu-button {
@@ -179,7 +182,7 @@ main {
   flex: 1;
 }
 
-/* White hero with a soft-focus lime handwritten wordmark (resting-state look) */
+/* White hero: the logo sits centred and stays visible while the video plays */
 .hero-liquid {
   position: relative;
   display: grid;
@@ -207,50 +210,13 @@ main {
   opacity: 1;
 }
 
-.hero-word {
+.hero-logo {
   position: relative;
-  z-index: 0;
-  margin: 0;
-  font-family: "Caveat", cursive;
-  font-weight: 700;
-  font-size: clamp(2.75rem, 13vw, 12rem);
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
-  text-align: center;
-  color: #a9b53c; /* lighter olive handwriting */
-  -webkit-text-fill-color: #a9b53c;
-}
-
-/* Solid bright-lime highlighter blob behind: same handwriting fattened until
-   the strokes merge into one connected shape, then softened at the edges */
-.hero-word::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  color: #e4f43a;
-  -webkit-text-fill-color: #e4f43a;
-  -webkit-text-stroke: 0.2em #e4f43a;
-  paint-order: stroke fill;
-  filter: blur(0.055em);
-}
-
-/* Subtle ink/grain texture clipped into the letters — fails safe (no texture if unsupported) */
-.hero-word::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='140'%20height='140'%20filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 150px 150px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  mix-blend-mode: multiply;
-  opacity: 0.4;
+  z-index: 3; /* above the video, so it stays visible during playback */
+  width: min(72vw, 34rem);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 26px rgba(0, 0, 0, 0.28));
 }
 
 .home-copy {
@@ -290,19 +256,22 @@ main {
   width: min(100%, 44rem);
   margin: 0 auto;
   color: var(--ink-soft);
-  font-size: clamp(1.2rem, 2.7vw, 1.45rem);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.9vw, 1.7rem);
+  line-height: 1.45;
+  letter-spacing: 0;
 }
 
 .home-copy p {
   margin-bottom: 0;
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-style: normal;
   color: var(--ink);
-  font-size: clamp(1.6rem, 3.6vw, 2.25rem);
-  font-weight: 500;
-  letter-spacing: -0.028em;
-  line-height: 1.18;
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
 }
 
 .page-hero {
@@ -322,10 +291,10 @@ main {
   border-radius: 999px;
   color: var(--ink);
   background: var(--grad-accent);
-  box-shadow: 0 2px 14px rgba(205, 240, 70, 0.5);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  box-shadow: 0 2px 14px rgba(79, 180, 201, 0.45);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -333,34 +302,34 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
 h1 {
   margin-bottom: 1.25rem;
   color: var(--ink);
-  font-size: clamp(2.75rem, 9vw, 5.75rem);
-  font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
+  font-size: clamp(3rem, 9.5vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
 }
 
 h2 {
   margin-bottom: 1.5rem;
   color: var(--ink);
-  font-size: clamp(1.6rem, 3.6vw, 2.25rem);
-  font-weight: 500;
-  letter-spacing: -0.028em;
-  line-height: 1.08;
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.12;
 }
 
 h3 {
   margin-bottom: 0.75rem;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 500;
-  letter-spacing: -0.018em;
+  letter-spacing: -0.005em;
 }
 
 .section {
@@ -377,8 +346,8 @@ h3 {
 
 .body-copy {
   color: var(--ink-soft);
-  font-size: 1.0625rem;
-  line-height: 1.75;
+  font-size: 1.2rem;
+  line-height: 1.7;
 }
 
 .body-copy p {
@@ -392,7 +361,7 @@ h3 {
   border-radius: 0 0.75rem 0.75rem 0;
   color: var(--ink);
   background: var(--accent-soft);
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
   font-size: clamp(1.35rem, 2.6vw, 1.75rem);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -445,7 +414,7 @@ h3 {
 .card.accent-fill,
 .panel.accent-fill {
   background: var(--grad-accent);
-  box-shadow: 0 10px 30px rgba(196, 230, 60, 0.35);
+  box-shadow: 0 10px 30px rgba(79, 180, 201, 0.35);
 }
 
 .accent-fill .muted {
@@ -453,7 +422,7 @@ h3 {
 }
 
 .card-link.accent-fill:hover {
-  box-shadow: 0 16px 36px rgba(196, 230, 60, 0.48);
+  box-shadow: 0 16px 36px rgba(79, 180, 201, 0.48);
 }
 
 .accent-fill .button.alt {
@@ -482,7 +451,8 @@ h3 {
   border-radius: 999px;
   background: var(--grad-metal);
   box-shadow: var(--shadow-sm);
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .chip.accent-fill {
@@ -506,6 +476,166 @@ h3 {
   object-fit: cover;
   border-radius: 0.65rem;
   margin-bottom: 1rem;
+}
+
+/* Clickable project cards */
+.project-card {
+  cursor: pointer;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+.card-cta {
+  display: block;
+  margin-top: 1rem;
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.accent-fill .card-cta {
+  color: var(--ink);
+}
+
+.project-remove {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-mute);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.project-remove:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+}
+
+/* Reflection modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 20, 24, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(100%, 40rem);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 2.25rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  box-shadow: 0 30px 70px rgba(12, 20, 24, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.15rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.modal-note {
+  margin: 0 0 1.5rem;
+  color: var(--ink-mute);
+  font-size: 0.9rem;
+}
+
+.reflections {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.reflection {
+  padding: 1.15rem 1.25rem;
+  border-radius: 0.85rem;
+  background: var(--grad-metal);
+}
+
+.reflection-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.reflection-name {
+  font-weight: 600;
+}
+
+.reflection-date {
+  color: var(--ink-mute);
+  font-size: 0.8rem;
+}
+
+.reflection p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.reflection img,
+.rf-preview {
+  width: 100%;
+  max-height: 16rem;
+  object-fit: cover;
+  border-radius: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.reflections-empty {
+  color: var(--ink-mute);
+  font-style: italic;
+}
+
+.reflection-delete {
+  align-self: start;
+  border: 0;
+  background: transparent;
+  color: var(--ink-mute);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.reflection-delete:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
 }
 
 /* Eco-paper tutorial: numbered steps on the left, video on the right */
@@ -538,7 +668,7 @@ h3 {
 .scatter-num {
   display: block;
   margin-bottom: 0.75rem;
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
   font-size: 2.25rem;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -597,6 +727,8 @@ h3 {
 @media (min-width: 768px) {
   .founders {
     grid-template-columns: repeat(2, 19rem);
+    gap: 7rem;
+    max-width: 45rem;
   }
 }
 
@@ -619,13 +751,161 @@ h3 {
 }
 
 .small {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
 }
 
 .tracker {
   width: 100%;
   padding: 2.5rem;
   margin: 0 auto;
+}
+
+/* Tracker: a single figure visualised as a progress ring */
+.tracker-viz {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.tracker-ring {
+  flex: none;
+  width: 11rem;
+  height: 11rem;
+  transform: rotate(-90deg);
+}
+
+.ring-track,
+.ring-fill {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.ring-track {
+  stroke: rgba(79, 180, 201, 0.16);
+}
+
+.ring-fill {
+  stroke: var(--accent);
+  /* r=86 → circumference ≈ 540.4; 7.2% of goal filled */
+  stroke-dasharray: 540.4;
+  stroke-dashoffset: 501.5;
+}
+
+.tracker-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tracker-figure strong {
+  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-size: clamp(4rem, 11vw, 7rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent-ink);
+}
+
+.tracker-figure .unit {
+  font-size: 0.42em;
+  letter-spacing: 0;
+}
+
+.tracker-goal {
+  color: var(--accent-ink);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Animated per-project bar chart, filling the empty right side of the tracker */
+.tracker-chart {
+  flex: 1 1 18rem;
+  min-width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.chart-bars {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.85rem;
+  height: 9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.chart-bars .bar {
+  position: relative;
+  display: block;
+  height: var(--v);
+  border-radius: 0.4rem 0.4rem 0 0;
+  background: var(--grad-accent);
+  transform-origin: bottom;
+  animation: barGrow 900ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
+    barBreathe 4.5s ease-in-out infinite;
+}
+
+.chart-bars .bar:nth-child(1) { animation-delay: 0ms, 0ms; }
+.chart-bars .bar:nth-child(2) { animation-delay: 110ms, 300ms; }
+.chart-bars .bar:nth-child(3) { animation-delay: 220ms, 600ms; }
+.chart-bars .bar:nth-child(4) { animation-delay: 330ms, 900ms; }
+.chart-bars .bar:nth-child(5) { animation-delay: 440ms, 1200ms; }
+
+.chart-bars .bar em {
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes barBreathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.94);
+  }
+}
+
+.chart-axis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+  color: var(--ink-mute);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.chart-caption {
+  margin-top: 0.15rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-bars .bar {
+    animation: none;
+  }
 }
 
 .stats {
@@ -643,7 +923,7 @@ h3 {
 
 .stat strong {
   display: block;
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
   font-size: clamp(2.5rem, 4.5vw, 3rem);
   letter-spacing: -0.04em;
   line-height: 1;
@@ -707,8 +987,8 @@ h3 {
   border-radius: 999px;
   color: var(--ink);
   background: var(--grad-accent);
-  box-shadow: 0 2px 10px rgba(205, 240, 70, 0.5);
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  box-shadow: 0 2px 10px rgba(79, 180, 201, 0.45);
+  font-family: "Bodoni Moda", "Times New Roman", serif;
   font-weight: 600;
 }
 
@@ -726,7 +1006,7 @@ h3 {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(34rem 24rem at 88% 112%, rgba(205, 234, 76, 0.16), transparent 62%);
+    radial-gradient(34rem 24rem at 88% 112%, rgba(79, 180, 201, 0.16), transparent 62%);
 }
 
 .dark-band > * {
@@ -746,7 +1026,7 @@ h3 {
 
 .number strong {
   display: block;
-  font-family: "Onest", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Bodoni Moda", "Times New Roman", serif;
   font-size: clamp(3.25rem, 9vw, 4.75rem);
   line-height: 0.95;
   letter-spacing: -0.045em;
@@ -767,8 +1047,9 @@ h3 {
   border-radius: 0.65rem;
   color: var(--surface);
   background: var(--grad-dark);
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(16, 18, 22, 0.2);
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
@@ -777,7 +1058,7 @@ h3 {
 .button.alt {
   color: var(--ink);
   background: var(--grad-accent);
-  box-shadow: 0 6px 18px rgba(183, 221, 51, 0.35);
+  box-shadow: 0 6px 18px rgba(79, 180, 201, 0.35);
 }
 
 .button:hover {
@@ -797,8 +1078,8 @@ h3 {
 }
 
 .field label {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .field input,
