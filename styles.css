@@ -1,4 +1,6 @@
 :root {
+  --font-body: Helvetica, Arial, sans-serif;
+  --font-heading: "Onest", Helvetica, Arial, sans-serif;
   /* Neutral ink */
   --ink: #14161a;
   --ink-soft: rgba(20, 22, 26, 0.68);
@@ -50,7 +52,7 @@ body {
   color: var(--ink);
   background: var(--grad-page);
   background-attachment: fixed;
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: var(--font-body);
   font-size: 1.0625rem;
   font-weight: 500;
   line-height: 1.6;
@@ -262,7 +264,7 @@ main {
   width: min(100%, 44rem);
   margin: 0 auto;
   color: var(--ink-soft);
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-body);
   font-style: italic;
   font-size: clamp(1.35rem, 2.9vw, 1.7rem);
   line-height: 1.45;
@@ -271,7 +273,7 @@ main {
 
 .home-copy p {
   margin-bottom: 0;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-style: normal;
   color: var(--ink);
   font-size: clamp(1.75rem, 3.8vw, 2.5rem);
@@ -308,7 +310,7 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   line-height: 1.1;
   letter-spacing: -0.015em;
 }
@@ -367,7 +369,7 @@ h3 {
   border-radius: 0 0.75rem 0.75rem 0;
   color: var(--ink);
   background: var(--accent-soft);
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.35rem, 2.6vw, 1.75rem);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -701,7 +703,7 @@ h3 {
 .scatter-num {
   display: block;
   margin-bottom: 0.75rem;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: 2.25rem;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -834,7 +836,7 @@ h3 {
 }
 
 .tracker-figure strong {
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: clamp(4rem, 11vw, 7rem);
   font-weight: 400;
   line-height: 1;
@@ -965,7 +967,7 @@ h3 {
 
 .stat strong {
   display: block;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.5rem, 4.5vw, 3rem);
   letter-spacing: -0.04em;
   line-height: 1;
@@ -1030,7 +1032,7 @@ h3 {
   color: var(--ink);
   background: var(--grad-accent);
   box-shadow: 0 2px 10px rgba(79, 180, 201, 0.45);
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-weight: 600;
 }
 
@@ -1068,7 +1070,7 @@ h3 {
 
 .number strong {
   display: block;
-  font-family: "Bodoni Moda", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: clamp(3.25rem, 9vw, 4.75rem);
   line-height: 0.95;
   letter-spacing: -0.045em;
